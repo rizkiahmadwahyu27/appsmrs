@@ -44,7 +44,7 @@
       <a href="#" class="block p-2 rounded hover:bg-gray-700">Dashboard</a>
       <a href="#" class="block p-2 rounded hover:bg-gray-700">Users</a>
       <a href="{{route('data_pasien')}}" class="block p-2 rounded hover:bg-gray-700">Data Pasien</a>
-      <a href="#" class="block p-2 rounded hover:bg-gray-700">Orders</a>
+      <a href="{{route('gabung_data')}}" class="block p-2 rounded hover:bg-gray-700">Gabung Data</a>
       <a href="#" class="block p-2 rounded hover:bg-gray-700">Settings</a>
     </nav>
 
