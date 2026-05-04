@@ -26,7 +26,18 @@ Data Pasien
 </div>
 
 <br>
+<div class="mb-3 flex gap-2 items-center">
+    Dari: <input type="date" id="from_date" class="border p-1">
+    Sampai: <input type="date" id="to_date" class="border p-1">
 
+    <button id="filter" class="bg-blue-500 text-white px-3 py-1 rounded">
+        Filter
+    </button>
+
+    <button id="export" class="bg-green-500 text-white px-3 py-1 rounded">
+        Export Excel
+    </button>
+</div>
 <table id="table-gabungData" class="display" style="width:60%;">
     <thead>
         <tr>
@@ -45,25 +56,22 @@ Data Pasien
     </thead>
 </table>
 <script>
-  $('#table-gabungData').DataTable({
+var table = $('#table-gabungData').DataTable({
     processing: true,
     ajax: {
         url: '{{ url("/ambil/pasien") }}',
-        dataSrc: function(json) {
-            console.log(json);
-            return json.data;
+        data: function (d) {
+            d.from_date = $('#from_date').val();
+            d.to_date = $('#to_date').val();
         }
     },
     scrollY: '60vh',
     scrollCollapse: true,
     paging: true,
-
-    dom: 'Bfrtip', // 🔥 WAJIB
-
+    dom: 'Bfrtip',
     buttons: [
-        'copy', 'csv', 'excel', 'pdf', 'print'
+        'copy', 'csv', 'pdf', 'print'
     ],
-
     columns: [
         { data: 'rm' },
         { data: 'nama' },
@@ -77,6 +85,19 @@ Data Pasien
         { data: 'dpjp' },
         { data: 'ket' },
     ]
+});
+
+// 🔥 tombol filter
+$('#filter').click(function () {
+    table.ajax.reload();
+});
+
+// 🔥 tombol export (kirim parameter ke Laravel)
+$('#export').click(function () {
+    let from = $('#from_date').val();
+    let to = $('#to_date').val();
+
+    window.location.href = `/export/pasien?from_date=${from}&to_date=${to}`;
 });
 
 </script>

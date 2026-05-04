@@ -15,5 +15,6 @@ Route::post('/pasien/import', [DataPasienController::class, 'import']);
 
 Route::get('/gabung/data/pasien', [GabungDataController::class, 'gabung_data'])->name('gabung_data');
 Route::get('/ambil/pasien', [GabungDataController::class, 'ambilPasien']);
+Route::get('/export/pasien', [GabungDataController::class, 'exportPasien']);
 Route::post('/pasien/gabung/import', [GabungDataController::class, 'import_gabung'])->name('import_gabung');
 Route::post('/pasien/gabung/import/update', [GabungDataController::class, 'update_import_gabung'])->name('update_import_gabung');
